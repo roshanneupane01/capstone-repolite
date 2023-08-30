@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ).toLocaleDateString()}`
               : "No update date available"
           }</p>
-          <p>Language: ${repository.repository_language || "Not specified"}</p>
+          <p>Language: ${repository.language}</p>
         `;
 
         // Create "Add to Favorites" button
