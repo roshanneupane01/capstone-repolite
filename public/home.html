@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./home-styles.css" />
+  <title>RepoLite - Home Page</title>
+</head>
+<body>
+  <div class="nav-bar">
+    <a href="#" class="nav-link" data-section="all-repositories">All Repositories</a>
+    <a href="#" class="nav-link" data-section="favorites">Favorites</a>
+    <a href="/public/login.html"><button id="sign-out-button" class="sign-out-button">Sign Out</button></a>
+  </div>
+  
+  <div class="repositories" id="all-repositories-container">
+    <!-- All Repositories will be populated here -->
+  </div>
+  
+  <div class="repositories" id="favorites-container">
+    <!-- Favorites will be populated here -->
+  </div>
+  
+  <div class="repositories">
+    <!-- Repository cards will be populated here -->
+  </div>
+
+  <!-- Your script imports here -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="module" src="./home.js"></script>
+</body>
+</html>

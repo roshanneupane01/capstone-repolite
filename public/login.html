@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>RepoLite - Login Page</title>
+  </head>
+  <body>
+    <div class="tank">
+      <div class="top">
+        <h1>Welcome to RepoLite</h1>
+      </div>
+      <div class="middle">
+        <div class="sign-in-container">
+          <div class="sign-in-form">
+            <h4>Access Your Repositories | Add to Favorites | Make Notes</h4>
+            <a
+              id="github-sign-in-link"
+              class="github-sign-in-button"
+              href="https://github.com/login/oauth/authorize?client_id=31429aed41bfb22255ed&scope=repo"
+            >
+              <i class="fab fa-github"></i> Sign in with GitHub
+            </a>
+            <p>
+              Need to create a GitHub account?
+              <a
+                class="fab fa-github"
+                id="github-sign-up-link"
+                href="https://github.com/"
+                target="_blank"
+                >Sign Up</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom"></div>
+    </div>
+    <script src="../node_modules/axios/dist/axios.min.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>

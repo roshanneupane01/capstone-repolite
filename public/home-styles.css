@@ -1,0 +1,130 @@
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #5eff0021;
+}
+
+.nav-bar {
+  background-color: #e48181;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  margin-right: 20px;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.nav-link.active {
+  border-bottom: 2px solid white; /* Add a white underline */
+}
+
+.repositories {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  gap: 20px;
+  width: 70%; /* Set the desired width */
+  margin: 10px auto 20px auto;
+}
+
+.repository-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.repository-card h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+  flex-grow: 1;
+}
+
+.repository-card p {
+  font-size: 14px;
+  color: #777;
+  margin-right: 10px;
+}
+
+.favorites {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 70%;
+  margin: 10px auto 20px auto;
+}
+
+.add-to-favorites {
+  background-color: #c94040;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  flex-shrink: 0; /* Prevent button from shrinking */
+  min-width: 120px; /* Set a minimum width for the button */
+  text-align: center; /* Center text within the button */
+  white-space: nowrap; /* Prevent button text from wrapping */
+  overflow: hidden; /* Hide any overflowing text */
+  text-overflow: ellipsis; /* Show ellipsis (...) for truncated text */
+}
+
+.add-to-favorites:disabled {
+  background-color: #ccc; /* Grey background when disabled */
+  cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+  color: #777; /* Change text color */
+}
+
+.add-to-favorites:hover {
+  background-color: #1864ab;
+  color: rgb(234, 255, 252);
+}
+
+.add-to-favorites:active {
+  background-color: #0d2d4b;
+}
+
+.sign-out-button {
+  background-color: #c94040;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: auto;
+}
+
+.sign-out-button:hover {
+  background-color: #8c0101;
+  color: rgb(234, 255, 252);
+}
+
+.sign-out-button:active {
+  background-color: #230505;
+}
