@@ -8,9 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
   const repositoriesContainer = document.querySelector(".repositories");
 
-  const accessToken =
-    "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";
-
   let favoriteRepositories = [];
 
   signOutButton.addEventListener("click", async () => {
@@ -25,10 +22,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   async function fetchAllRepositories() {
+    const accessToken = await axios.get('/api/githubToken')
+
     try {
       const response = await axios.get("https://api.github.com/user/repos", {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken.data.token}`,
         },
       });
 
@@ -55,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ).toLocaleDateString()}`
               : "No update date available"
           }</p>
-          <p>Language: ${repository.language || "Not specified"}</p>
+          <p>Language: ${repository.repository_language || "Not specified"}</p>
         `;
 
         // Create "Add to Favorites" button
@@ -64,7 +63,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         addToFavoritesButton.textContent = "Add to Favorites";
         addToFavoritesButton.dataset.id = repository.id;
         addToFavoritesButton.addEventListener("click", () =>
-          addToFavorites(repository.id, repository.name, repository.updated_at, repository.language)
+          addToFavorites(
+            repository.id,
+            repository.name,
+            repository.updated_at,
+            repository.language
+          )
         );
 
         // Append elements to the repository card
@@ -95,9 +99,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         const rowDiv = document.createElement("div");
         rowDiv.classList.add("row");
 
-        console.log(favoriteRepositories)
+        console.log(favoriteRepositories);
         favoriteRepositories[0].forEach((repository) => {
-          console.log(repository)
+          console.log(repository);
           const repositoryCard = document.createElement("div");
           repositoryCard.classList.add("repository-card");
 
@@ -140,24 +144,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function addToFavorites(id, name, updatedAt, language) {
-    console.log('Adding to favorites:', id, name, updatedAt, language);
+    console.log("Adding to favorites:", id, name, updatedAt, language);
     if (!favoriteRepositories.includes(id)) {
       // Check if the repository exists in the database
       const repositoryExists = await axios.get(`/api/repositoryExists/${id}`);
-      
+
       // if (!repositoryExists.data.exists) {
       //   console.log(`Repository with ID ${id} does not exist.`);
       //   return;
       // }
-  
+
       favoriteRepositories.push(id);
-  
+
       const addToFavoritesButton = document.querySelector(
         `.add-to-favorites[data-id="${id}"]`
       );
       addToFavoritesButton.disabled = true;
       addToFavoritesButton.classList.add("added-to-favorites");
-  
+
       try {
         const response = await axios.post("/api/addRepoToFav", {
           repositoryId: id,
@@ -165,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           repositoryUpdatedAt: updatedAt,
           repositoryLanguage: language,
         });
-        console.log(response.data)
+        console.log(response.data);
         console.log(
           `${name} added to favorites and repository info saved to the database.`,
           favoriteRepositories
@@ -177,7 +181,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
       }
     }
-  }  
+  }
 
   function showAllRepositories() {
     repositoriesContainer.innerHTML = "";
@@ -226,7 +230,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         deleteFromFavoritesButton.classList.add("add-to-favorites");
         deleteFromFavoritesButton.textContent = "Delete from Favorites";
         deleteFromFavoritesButton.dataset.id = repository.repository_id;
-        ;
         deleteFromFavoritesButton.addEventListener("click", () =>
           deleteFromFavorites(repository.repository_id)
         );
@@ -243,11 +246,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   function deleteFromFavorites(id) {
-    console.log("hello")
-    const index = favoriteRepositories.findIndex((repo) => repo === parseInt(id));
+    console.log("hello");
+    const index = favoriteRepositories.findIndex(
+      (repo) => repo === parseInt(id)
+    );
     axios.delete(`/api/deleteRepoFromFav/${id}`).then((res) => {
-      fetchFavoriteRepositories()
-    })
+      fetchFavoriteRepositories();
+    });
     if (index !== -1) {
       // favoriteRepositories.splice(index, 1);
       console.log(
